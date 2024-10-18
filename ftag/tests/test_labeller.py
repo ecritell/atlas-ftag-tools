@@ -78,3 +78,12 @@ def test_labeller_property():
     labeller = Labeller(flavours)
     label_vars = labeller.variables
     assert label_vars == ["R10TruthLabel_R22v1", "GhostBHadronsFinalCount"]
+
+
+def test_labeller_value():
+    input_class_names = ["hbb", "hcc", "top", "qcdbb", "qcdnonbb", "qcdbx", "qcdcx", "qcdll"]
+    labeller = Labeller(input_class_names)
+    label_names = [label.name for label in labeller.labels]
+    assert label_names == ["hbb", "hcc", "qcdbb", "qcdbx", "qcdcx", "qcdll", "qcdnonbb", "top"]
+    labels_of_input_class_names = list(map(lambda x: label_names.index(x), input_class_names))
+    assert labels_of_input_class_names == [0, 1, 7, 2, 6, 3, 4, 5]
